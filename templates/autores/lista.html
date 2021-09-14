@@ -1,0 +1,32 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block conteudo %}
+			<div class="page-header text-center py-3">
+            	<h1>Autores</h1>
+        	</div>
+            {% include 'partils/_alertas.html' %}
+            <table class="table caption-top">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Data de nascimento</th>
+                        <th scope="col">Nacionalidade</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Excluir</th>
+                    </tr>
+                </thead>
+                {% for autor in autores %}
+                <tbody>
+                    <tr>
+                        <td>{{ autor.nome }}</td>
+                        <td>{{ autor.data_nasc }}</td>
+                        <td>{{ autor.nacionalidade }}</td>
+                        <td>{{ autor.get_sexo_display }}</td>
+                        <td><a href="{% url 'edita_autor' autor.id %}" class="btn btn-primary">Editar</a></td>
+                        <td><a href="{% url 'deleta_autor' autor.id %}" class="btn btn-danger">Deletar</a></td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+{% endblock %}

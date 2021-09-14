@@ -1,0 +1,33 @@
+{% extends '../template.html' %}
+{% load static %}
+{% block conteudo %}
+    <div class="row">
+        <div class="col-12">
+            <div align="center">
+                <h2>Editar Editora</h2>
+            </div>
+        </div>
+    </div>
+    {% include 'partils/_alertas.html' %}
+    <form action="{% url 'atualiza_editora' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{ editora.id }}" name="editora_id">
+        <div class="row">
+            <div class="col-12 col-lg-12 mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{ editora.nome }}" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cidade" name="cidade" value="{{ editora.cidade }}" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="estado" name="estado" value="{{ editora.estado }}" required>
+            </div>
+            <div class="col-12 col-lg-12">
+                <button class="btn btn-primary" type="submit">Atualizar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

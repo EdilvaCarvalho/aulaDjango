@@ -1,0 +1,39 @@
+{% extends '../template.html' %}
+{% load static %}
+{% block conteudo %}
+    <div class="row">
+        <div class="col-12">
+            <div align="center">
+                <h2>Criar Autor</h2>
+            </div>
+        </div>
+    </div>
+    {% include 'partils/_alertas.html' %}
+    <form action="{% url 'cria_autor' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="data_nasc" class="form-label">Data de nascimento</label>
+                <input type="date" class="form-control" id="data_nasc" name="data_nasc" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nacionalidade" class="form-label">Nacionalidade</label>
+                <input type="text" class="form-control" id="nacionalidade" name="nacionalidade" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="sexo" class="form-label">Sexo</label>
+                <select class="form-select" aria-label="Default select example" id="sexo" name="sexo" required>
+                    <option value="1">Masculino</option>
+                    <option value="2">Feminino</option>
+                </select>
+            </div>
+            <div class="col-12 col-lg-12">
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

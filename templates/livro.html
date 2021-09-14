@@ -1,0 +1,28 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block conteudo %}
+			<div class="page-header text-center py-3">
+            	<h1>Livro</h1>
+        	</div>
+			<div class="row">
+				<div class="col-sm-4">
+					{% if livro.capa_livro == '' %}
+							<img src="{% static 'img/livro.png' %}" class="card-img-top" alt="...">
+						{% else %}
+							<img src="{{ livro.capa_livro.url }}" class="card-img-top" alt="...">
+						{% endif %}
+				</div>
+				<div class="col-sm-8">
+				    <p class="h4"><strong>Nome: </strong>{{ livro.nome }}</p>
+        			<p class="h4"><strong>Gênero: </strong>{{ livro.genero }}</p>
+					{% for autor in livro.autor.all %}
+        				<p class="h4"><strong>Autor: </strong>{{ autor.nome }}</p>
+					{% endfor %}
+					<p class="h4"><strong>Ano de Publicação: </strong>{{ livro.ano_pub }}</p>
+					<p class="h4"><strong>Quantidade de páginas: </strong>{{ livro.qtd_paginas }}</p>
+					<p class="h4"><strong>Editora: </strong>{{ livro.editora.nome }}</p>
+					<p class="h4"><strong>Resenha: </strong></p>
+					<p class="h5">{{ livro.resenha }}</p>
+				</div>
+			</div>
+{% endblock %}

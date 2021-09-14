@@ -1,0 +1,42 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block conteudo %}
+			<div class="page-header text-center py-3">
+            	<h1>Livros</h1>
+        	</div>
+			<div class="row">
+				{% for livro in livros %}
+				<div class="col-sm-4">
+			        <div class="card" style="width: 18rem;">
+						{% if livro.capa_livro == '' %}
+							<img src="{% static 'img/livro.png' %}" class="card-img-top" alt="...">
+						{% else %}
+							<img src="{{ livro.capa_livro.url }}" class="card-img-top" alt="...">
+						{% endif %}
+				  		<div class="card-body">
+						    <a href="{% url 'livro' livro.id %}" class="text-decoration-none text-reset"><h5 class="card-title">{{ livro.nome }}</h5></a>
+							<p>Autor(es): </p>
+							{% for autor in livro.autor.all %}
+						    	<p class="card-text"> {{ autor.nome }}</p>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="pagination">
+				<span class="step-links">
+					{% if livros.has_previous %}
+						<a href="?page={{ livros.previous_page_number }}">Anterior</a>
+					{% endif %}
+
+					<span class="current">
+						{{ livros.number }} de {{ livros.paginator.num_pages }}
+					</span>
+
+					{% if livros.has_next %}
+						<a href="?page={{ livros.next_page_number }}">Próxima</a>
+					{% endif %}
+				</span>
+			</div>
+{% endblock %}

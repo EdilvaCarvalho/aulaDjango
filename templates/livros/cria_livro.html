@@ -1,0 +1,60 @@
+{% extends '../template.html' %}
+{% load static %}
+{% block conteudo %}
+    <div class="row">
+        <div class="col-12">
+            <div align="center">
+                <h2>Criar Livro</h2>
+            </div>
+        </div>
+    </div>
+    {% include 'partils/_alertas.html' %}
+    <form action="{% url 'cria_livro' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="genero" class="form-label">Gênero</label>
+                <input type="text" class="form-control" id="genero" name="genero" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="qtd_paginas" class="form-label">Quantidade de páginas</label>
+                <input type="number" class="form-control" id="qtd_paginas" name="qtd_paginas" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="ano_pub" class="form-label">Ano de publicação</label>
+                <input type="number" class="form-control" id="ano_pub" name="ano_pub" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+              <label for="capa_livro" class="form-label">Capa do livro</label>
+              <input class="form-control" type="file" id="capa_livro" name="capa_livro">
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="autor" class="form-label">Autor(es)</label>
+                <select class="form-select" multiple size="3" name="autor" aria-label="multiple select example" id="autor" required>
+                    {% for autor in autores %}
+                        <option value="{{ autor.id }}">{{ autor.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="editora" class="form-label">Editora</label>
+                <select class="form-select" aria-label="Default select example" name="editora" id="editora" required>
+                    {% for editora in editoras %}
+                        <option value="{{ editora.id }}" >{{ editora.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="resenha" class="form-label">Resenha</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" id="resenha" name="resenha"></textarea>
+            </div>
+            <div class="col-12 col-lg-12">
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

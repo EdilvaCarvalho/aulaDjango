@@ -1,0 +1,30 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block conteudo %}
+			<div class="page-header text-center py-3">
+            	<h1>Editoras</h1>
+        	</div>
+            {% include 'partils/_alertas.html' %}
+            <table class="table caption-top">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Cidade</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Deletar</th>
+                    </tr>
+                </thead>
+                {% for editora in editoras %}
+                <tbody>
+                    <tr>
+                        <td>{{ editora.nome }}</td>
+                        <td>{{ editora.cidade }}</td>
+                        <td>{{ editora.estado }}</td>
+                        <td><a href="{% url 'edita_editora' editora.id %}" class="btn btn-primary">Editar</a></td>
+                        <td><a href="{% url 'deleta_editora' editora.id %}" class="btn btn-danger">Deletar</a></td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+{% endblock %}
